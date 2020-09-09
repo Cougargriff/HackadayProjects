@@ -1,5 +1,41 @@
-body {
-  background: red; }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 
 .ProjectsContainer {
   display: flex;
@@ -7,21 +43,24 @@ body {
   align-items: center;
   justify-content: space-evenly;
   padding: 20px;
-  width: 100%; }
+  width: 100%;
+}
 
 .ProjectContent {
   width: 600px;
   height: 400px;
   padding: 30px;
   margin: 30px;
-  background: white; }
+  background: white;
+}
 
 .PageBar {
   width: 100%;
   height: 80px;
   align-items: center;
   display: flex;
-  justify-content: space-evenly; }
+  justify-content: space-evenly;
+}
 
 .PageNum {
   font-size: 20px;
@@ -31,10 +70,12 @@ body {
   margin: 15px;
   border-radius: 16px;
   background: blue;
-  text-align: center; }
+  text-align: center;
+}
 
 .Title {
-  text-align: center; }
+  text-align: center;
+}
 
 .Button {
   text-align: center;
@@ -48,12 +89,18 @@ body {
   color: white;
   border: 2px solid white;
   text-decoration: none;
-  transition-duration: 0.4s; }
-  .Button:hover {
-    background: transparent;
-    border: 2px solid black;
-    cursor: pointer;
-    background-color: white;
-    color: black; }
+  transition-duration: 0.4s;
+}
+.Button:hover {
+  background: transparent;
+  border: 2px solid black;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
+body {
+  background: red;
+}
 
 /*# sourceMappingURL=main.css.map */

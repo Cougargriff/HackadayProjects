@@ -1,10 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js">
-  <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,8 +13,15 @@
     <div class="ProjectsContainer">
       <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
       <div class="ProjectContent">
-        <%= element.name %> <br/> <%= element.owner %> <br/> <br/>  <%= element.summary %> <br/> <br/>  <%=
-        element.description %>
+        <%= element.name %> <br/> 
+        <div class="tooltip">
+          <%= element.owner.screen_name %>
+          <span class="tooltiptext">
+             You are hovering
+          </span>
+      </div>
+         <br/> <br/>  <%- element.summary %> <br/> <br/>  
+        <%- element.description %>
       </div>
       <% }) %>
     </div>
