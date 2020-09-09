@@ -1,0 +1,25 @@
+{
+  "name": "hackadayprojects",
+  "version": "1.0.0",
+  "description": "hackaday projects display",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cougargriff/HackadayProjects.git"
+  },
+  "author": "griffin johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cougargriff/HackadayProjects/issues"
+  },
+  "homepage": "https://github.com/Cougargriff/HackadayProjects#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
