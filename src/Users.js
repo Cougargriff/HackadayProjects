@@ -1,7 +1,7 @@
 const getUserGen = () => {
   /*
     Closure over this map serves as a cache to remember
-    which project pages we have visited.
+    which users we have seen.
   */
   userList = {};
 

@@ -1,8 +1,7 @@
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
-}
+  border-bottom: 1px dotted black; }
 
 .tooltip .tooltiptext {
   visibility: hidden;
@@ -18,8 +17,7 @@
   left: 50%;
   margin-left: -60px;
   opacity: 0;
-  transition: opacity 0.3s;
-}
+  transition: opacity 0.3s; }
 
 .tooltip .tooltiptext::after {
   content: "";
@@ -29,13 +27,11 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
+  border-color: #555 transparent transparent transparent; }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
-  opacity: 1;
-}
+  opacity: 1; }
 
 .ProjectsContainer {
   display: flex;
@@ -43,24 +39,32 @@
   align-items: center;
   justify-content: space-evenly;
   padding: 20px;
-  width: 100%;
-}
+  width: 100%; }
 
 .ProjectContent {
+  font-family: "Roboto", sans-serif;
   width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   height: 400px;
+  border-radius: 20px;
   padding: 30px;
   margin: 30px;
-  background: white;
-}
+  transition-duration: 0.4s; }
+  .ProjectContent:hover {
+    -webkit-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+    cursor: pointer; }
 
 .PageBar {
   width: 100%;
   height: 80px;
+  position: fixed;
+  bottom: 0;
   align-items: center;
   display: flex;
-  justify-content: space-evenly;
-}
+  justify-content: space-evenly; }
 
 .PageNum {
   font-size: 20px;
@@ -70,14 +74,15 @@
   margin: 15px;
   border-radius: 16px;
   background: blue;
-  text-align: center;
-}
+  text-align: center; }
 
 .Title {
-  text-align: center;
-}
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 70px;
+  text-align: center; }
 
 .Button {
+  font-family: "Roboto", sans-serif;
   text-align: center;
   display: inline;
   border-radius: 3px;
@@ -89,18 +94,16 @@
   color: white;
   border: 2px solid white;
   text-decoration: none;
-  transition-duration: 0.4s;
-}
-.Button:hover {
-  background: transparent;
-  border: 2px solid black;
-  cursor: pointer;
-  background-color: white;
-  color: black;
-}
+  transition-duration: 0.4s; }
+  .Button:hover {
+    background: transparent;
+    border: 2px solid black;
+    cursor: pointer;
+    color: black; }
 
 body {
-  background: red;
-}
+  background: white;
+  align-items: center;
+  align-content: center; }
 
 /*# sourceMappingURL=main.css.map */

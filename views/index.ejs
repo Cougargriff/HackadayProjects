@@ -8,16 +8,22 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="ProjectsContainer">
       <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
-      <div class="ProjectContent">
+      <div class="ProjectContent" style=<%= `background-image: url(${element.image_url})` %> >
+        <img src=<%= `${element.image_url}` %> width="30%" />
         <%= element.name %> <br/> 
         <div class="tooltip">
           <%= element.owner.screen_name %>
           <span class="tooltiptext">
-             You are hovering
+            <%= element.owner.username %> <br/>
+            <%= element.owner.projects %> <br/>
+            <%= element.owner.followers %> <br/>
+            <%= element.owner.following %> <br/>
+            <%= new Date(element.owner.created) %>
           </span>
       </div>
          <br/> <br/>  <%- element.summary %> <br/> <br/>  
@@ -25,12 +31,25 @@
       </div>
       <% }) %>
     </div>
-    <div class="PageBar">
+    <div class="PageBar" id="pageBar">
       <% if (currPage > 1) { %>
-        <a class="Button" href=<%=`/${currPage - 1}`%>> Previous Page </a>
+        <a class="Button" id="prevB" href=<%=`?page=${currPage - 1}`%>> Previous Page </a>
       <% } %> 
-      <a class="Button" href=<%=`/${currPage + 1}`%>> Next Page </a>
+      <a class="Button" id="nextB" href=<%=`?page=${currPage + 1}`%>> Next Page </a>
     </div>
-    <script src="" async defer></script>
+    <script>
+      var i = 0
+      $('#nextB').click( () => {
+    
+      })
+
+      $('#pageBar').click(() => {
+        alert(`${++i}`)
+      })
+      $('#prevB').click( () => {
+       
+      })
+
+    </script>
   </body>
 </html>

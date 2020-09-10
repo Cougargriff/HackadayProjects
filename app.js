@@ -18,10 +18,10 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
-  var page = await getPage(fetch, 1);
+  const pg = req.query.page === undefined ? 1 : parseInt(req.query.page)  
+  var page = await getPage(fetch, pg) 
 
   console.log("Received Page");
-
   page = await Promise.all(
     page.map(async (prj) => {
       var author = await getUser(fetch, prj.owner_id);
@@ -32,38 +32,16 @@ app.get("/", async (req, res) => {
     })
   );
   console.log("Finished Getting Meta Data");
-
   page = JSON.stringify(page);
+
   res.render("index", {
     title: "Hackaday Projects",
     prjs: page,
-    currPage: 1,
+    currPage: pg
   });
 });
 
-app.get("/:page", async (req, res) => {
-  const pg = req.params.page;
-  var page = await getPage(fetch, pg);
-  console.log("Received Page");
-
-  page = await Promise.all(
-    page.map(async (prj) => {
-      var author = await getUser(fetch, prj.owner_id);
-      return {
-        ...prj,
-        owner: author,
-      };
-    })
-  );
-  console.log("Finished Getting Meta Data");
-
-  page = JSON.stringify(page);
-  res.render("index", {
-    title: "Hackaday Projects",
-    prjs: page,
-    currPage: parseInt(pg),
-  });
-});
+/* TODO add details page for project */
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
