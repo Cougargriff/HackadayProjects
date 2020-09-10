@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "sass ./public/sass/main.sass ./public/css/main.css & node app.js"
+    "start": "sass --watch ./public/sass/main.sass:./public/css/main.css & node app.js"
   },
   "repository": {
     "type": "git",

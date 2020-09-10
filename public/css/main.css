@@ -43,19 +43,22 @@
   margin-bottom: 100px; }
 
 .projectTitle {
+  opacity: 1;
   font-size: 40px;
   font-family: "Noto Sans JP", sans-serif; }
 
 .projectWords {
+  border-radius: 10px;
   background: black;
   max-width: 90%;
   opacity: 0.7;
   color: white;
-  padding: 5px; }
+  padding: 10px; }
 
 .snippet {
   bottom: 30px;
   position: absolute;
+  max-width: 90%;
   display: block;
   display: -webkit-box;
   -webkit-line-clamp: 8;
@@ -109,7 +112,7 @@
   font-family: "Roboto", sans-serif;
   text-align: center;
   display: inline;
-  border-radius: 3px;
+  border-radius: 10px;
   padding: 0.5rem 0.5rem;
   width: 400px;
   margin: 0.5rem 1rem;
@@ -124,6 +127,39 @@
     border: 2px solid black;
     cursor: pointer;
     color: black; }
+
+.detailsContainer {
+  padding-top: 70px;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  width: 900px; }
+
+.textContainer {
+  text-align: left; }
+
+.CoverPhoto {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+  width: 900px;
+  height: 900px;
+  border-radius: 20px;
+  margin: 30px;
+  margin-top: 100px;
+  padding: 30px;
+  -webkit-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75); }
+
+.detailsTitle {
+  opacity: 1;
+  padding: 20px;
+  position: absolute;
+  display: block;
+  bottom: 0;
+  font-size: 60px; }
 
 body {
   width: 100%;
