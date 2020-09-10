@@ -1,14 +1,34 @@
+$mobileWidth: 400px
+$inbetweenWidth: 500px
 $detailsWidth: 900px
-  
+
+
+.recContainer
+  display: flex
+  align-items: center
+  justify-content: space-evenly
+
+
 .detailsContainer
   padding-top: 70px
   align-content: center
   align-items: center
   text-align: center
-  width: $detailsWidth 
+  width: 70% 
+  @media (max-width: 1000px )
+    width: 80%
+  @media ( max-width:  605px )
+    width: 95%
 
 .textContainer
+  font-family: 'Roboto', sans-serif
+  line-height: 1.6
+  font-size: 30px
   text-align: left
+  @media (max-width: 1000px )
+    font-size: 20px
+  @media ( max-width:  605px )
+    font-size: 12px
 
 .CoverPhoto
   position: relative
@@ -16,7 +36,7 @@ $detailsWidth: 900px
   background-size: cover
   font-family: 'Roboto', sans-serif
   width: $detailsWidth
-  height: 900px
+  height: $detailsWidth
   border-radius: 20px
   margin: 30px
   margin-top: 100px
@@ -25,6 +45,16 @@ $detailsWidth: 900px
   -moz-box-shadow: 0px 10px 63px -8px rgba(0,0,0,0.75)
   box-shadow: 0px 10px 63px -8px rgba(0,0,0,0.75)
 
+  @media (max-width: 1000px )
+    width: $inbetweenWidth
+    height: $inbetweenWidth
+    padding: 20px
+    
+  @media ( max-width:  605px )
+    width: 250px
+    height: 250px
+    padding: 10px
+    
 .detailsTitle
   opacity: 1
   padding: 20px
@@ -32,3 +62,12 @@ $detailsWidth: 900px
   display: block
   bottom: 0
   font-size: 60px
+
+  @media (max-width: 1000px )
+    padding: 17px
+    font-size: 40px
+
+  @media ( max-width:  605px )
+    padding: 10px
+    font-size: 30px
+  

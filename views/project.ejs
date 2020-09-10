@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <% prj = JSON.parse(prj) %> 
+    <% tags = JSON.parse(tags) %> 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -16,14 +17,16 @@
     
   <center>
     <div class="CoverPhoto" style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/720x720/${split[1]}`})(prj.image_url.split("images/")) %>)" >
-      <h1 class="projectWords detailsTitle" > <%= prj.name %>  </h1>
+      <h1 class="projectWords detailsTitle" > <%- prj.name %>  </h1>
     </div>
     <div class="detailsContainer textContainer">
-      <%= prj.description %> 
+      <%- prj.description %> 
     </div>
   </center>
 
-  
+  <div class="recContainer">
+    
+  </div>
       
    
     

@@ -6,9 +6,12 @@ require("dotenv").config();
 
 var Projects = require("./src/Projects.js");
 var Users = require("./src/Users.js");
+var Tags = require("./src/Tags.js");
+const { json } = require("express");
 var getProject = Projects.getProject;
 var getPage = Projects.getPageGen();
 var getUser = Users.getUserGen();
+var findTag = Tags.findTagGen();
 
 const port = 3000;
 app.use(express.static("public"));
@@ -42,16 +45,20 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/:id", async (req, res) => {
+app.get("/projects/:id", async (req, res) => {
   const id = req.params.id
-  const prj = JSON.stringify(await getProject(fetch, id))
-    
+  const prj = await getProject(fetch, id)
+  const tagMap = {}
+  await Promise.all(prj.tags.foreach( async tag => {
+    tagMap[tag] = await findTag(fetch, tag)
+  }))
+
   res.render("project", {
-    prj: prj
+    prj: JSON.stringify(prj),
+    tags: JSON.stringify(tagMap)
   });
 })
 
-/* TODO add details page for project */
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);

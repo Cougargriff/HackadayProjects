@@ -13,8 +13,9 @@
   <body>
     <div class="ProjectsContainer">
       <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
-        <a href=<%=`/${element.id}`%>>
-        <div class="ProjectContent" style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/600x600/${split[1]}`})(element.image_url.split("images/")) %>)" >
+        <a href=<%=`/projects/${element.id}`%>>
+        <div class="ProjectContent" 
+          style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/600x600/${split[1]}`})(element.image_url.split("images/")) %>)">
         
         <div class="projectWords projectTitle">
           <%= element.name %>
@@ -27,14 +28,20 @@
                 <div>
                   <%= element.owner.username %> 
                 </div>
-                <div>
-                  <%= element.owner.projects %> 
+                <div class="aboutTool">
+                  <%= `${element.owner.about_me}` %>
                 </div>
+                <br/>
                 <div>
-                  <%= element.owner.followers %> 
+                  <%= `${element.owner.projects} Project${element.owner.projects > 1 ? "s" : ""}` %> 
                 </div>
-                <div>
-                  <%= element.owner.following %> 
+                
+                <div class="toolContainer">
+                  <%= element.owner.followers %> Followers  &nbsp;|  &nbsp;
+                  <%= element.owner.following %> Following 
+                </div>
+                <div class="toolContainer">
+                  
                 </div>
               </div>
           </span>

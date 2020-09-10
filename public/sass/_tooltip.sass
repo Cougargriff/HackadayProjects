@@ -1,13 +1,16 @@
+
+  
 .tooltip 
   position: relative
   display: inline-block
+  padding: 10px
   border-bottom: 1px dotted black
 
 .tooltip .tooltiptext 
   visibility: hidden
-  width: 120px
-  background-color: #222222
-  color: #fff
+  width: 230px
+  background: black
+  color: white
   text-align: center
   border-radius: 6px
   padding: 5px 0
@@ -22,14 +25,27 @@
 .tooltip .tooltiptext::after
   content: ""
   position: absolute
+  opacity: 1
   top: 100%
   left: 50%
   margin-left: -5px
   border-width: 5px
   border-style: solid
-  border-color: #555 transparent transparent transparent
+  border-color: black transparent transparent transparent
 
 
 .tooltip:hover .tooltiptext 
   visibility: visible
   opacity: 1
+
+.tooltip:show 
+  opacity: 1
+
+.toolContainer
+  padding: 10px
+  font-size: 16px
+  display: flex
+  align-items: center
+
+.aboutTool
+  font-size: 12px

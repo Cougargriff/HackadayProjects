@@ -1,13 +1,14 @@
 .tooltip {
   position: relative;
   display: inline-block;
+  padding: 10px;
   border-bottom: 1px dotted black; }
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: #222222;
-  color: #fff;
+  width: 230px;
+  background: black;
+  color: white;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
@@ -22,16 +23,29 @@
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
+  opacity: 1;
   top: 100%;
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent; }
+  border-color: black transparent transparent transparent; }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1; }
+
+.tooltip:show {
+  opacity: 1; }
+
+.toolContainer {
+  padding: 10px;
+  font-size: 16px;
+  display: flex;
+  align-items: center; }
+
+.aboutTool {
+  font-size: 12px; }
 
 .ProjectsContainer {
   display: flex;
@@ -105,7 +119,7 @@
 
 .Title {
   font-family: "Noto Sans JP", sans-serif;
-  font-size: 70px;
+  font-size: 90px;
   text-align: center; }
 
 .Button {
@@ -121,22 +135,42 @@
   color: white;
   border: 2px solid white;
   text-decoration: none;
-  transition-duration: 0.4s; }
+  transition-duration: 0.6s; }
   .Button:hover {
     background: transparent;
     border: 2px solid black;
     cursor: pointer;
     color: black; }
 
+.recContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly; }
+
 .detailsContainer {
   padding-top: 70px;
   align-content: center;
   align-items: center;
   text-align: center;
-  width: 900px; }
+  width: 70%; }
+  @media (max-width: 1000px) {
+    .detailsContainer {
+      width: 80%; } }
+  @media (max-width: 605px) {
+    .detailsContainer {
+      width: 95%; } }
 
 .textContainer {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  font-size: 30px;
   text-align: left; }
+  @media (max-width: 1000px) {
+    .textContainer {
+      font-size: 20px; } }
+  @media (max-width: 605px) {
+    .textContainer {
+      font-size: 12px; } }
 
 .CoverPhoto {
   position: relative;
@@ -152,6 +186,16 @@
   -webkit-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75); }
+  @media (max-width: 1000px) {
+    .CoverPhoto {
+      width: 500px;
+      height: 500px;
+      padding: 20px; } }
+  @media (max-width: 605px) {
+    .CoverPhoto {
+      width: 250px;
+      height: 250px;
+      padding: 10px; } }
 
 .detailsTitle {
   opacity: 1;
@@ -160,6 +204,14 @@
   display: block;
   bottom: 0;
   font-size: 60px; }
+  @media (max-width: 1000px) {
+    .detailsTitle {
+      padding: 17px;
+      font-size: 40px; } }
+  @media (max-width: 605px) {
+    .detailsTitle {
+      padding: 10px;
+      font-size: 30px; } }
 
 body {
   width: 100%;
