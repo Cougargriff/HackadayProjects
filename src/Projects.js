@@ -10,7 +10,7 @@ const getPageGen = () => {
   const getPage = async (fetch, n) => {
     const url_prefix = process.env.API_URL
     const key = process.env.API_KEY
-    const url = `${url_prefix}${n}&api_key=${key}`
+    const url = `${url_prefix}projects?page=${n}&per_page=12&api_key=${key}`
     var res = {}
     if (projectList[n] == undefined) {
       res = (await fetch(url).then(res => res.json()))

@@ -2,27 +2,32 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <h1> <%= title %> </h1>
-    <h3>
-    </h3>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/main.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <h1 class="Title"><%= title %></h1>
+    <h3></h3>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
-  <body >
-
-    <div className="ProjectsContainer">
-      <% if (prjs.length > 0) { %> 
-        <% for(prj in prjs) { %>
-          <p> <% console.log(prj.name) %> <%=prj  %> </p>
-        <% } %> 
-      <% } else { %>
-          <% console.log(prjs.length) %> <%= "Still loading" %> 
+  <body>
+    <div class="ProjectsContainer">
+      <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
+      <div class="ProjectContent">
+        <%= element.name %> <br/> <%= element.owner %> <br/> <br/>  <%= element.summary %> <br/> <br/>  <%=
+        element.description %>
+      </div>
+      <% }) %>
+    </div>
+    <div class="PageBar">
+      <% if (currPage > 1) { %>
+        <a class="Button" href=<%=`/${currPage - 1}`%>> Previous Page </a>
       <% } %> 
+      <a class="Button" href=<%=`/${currPage + 1}`%>> Next Page </a>
     </div>
     <script src="" async defer></script>
   </body>

@@ -5,8 +5,9 @@ var app = express();
 require('dotenv').config()
 
 var Projects = require('./src/Projects.js')
+var Users = require('./src/Users.js')
 var getPage = Projects.getPageGen()
-
+var getUser = Users.getUserGen()
 
 const port = 3000;
 app.use(express.static("public"));
@@ -18,17 +19,47 @@ app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
   var page = await getPage(fetch, 1)
-  res.render("index", { title: "Hackaday Projects", prjs: page });
+  
+  console.log('Received Page')
+
+  page = await Promise.all(page.map(async (prj) => {
+    var ownerName = await getUser(fetch, prj.owner_id)
+    return {
+      ...prj,
+      owner: ownerName
+    }
+  }))
+  console.log('Finished Getting Meta Data')
+
+  page = JSON.stringify(page)
+  res.render("index", {
+    title: "Hackaday Projects",
+    prjs: page,
+    currPage: 1
+  });
 });
 
 app.get('/:page', async (req, res) => {
   const pg = req.params.page
-  var page = []
-  getPage(fetch, pg).then(projs => res.render("index", { title: "Hackaday Projects", prjs: projs }))
-  res.render("index", { title: "Hackaday Projects", prjs: page });
+  var page = await getPage(fetch, pg)
+  console.log('Received Page')
+
+  page = await Promise.all(page.map( async (prj) => {
+    var ownerName = await getUser(fetch, prj.owner_id)
+    return {
+      ...prj,
+      owner: ownerName
+    }
+  }))
+  console.log('Finished Getting Meta Data')
+
+  page = JSON.stringify(page)
+  res.render("index", {
+    title: "Hackaday Projects",
+    prjs: page,
+    currPage: parseInt(pg)
+  });
 })
-
-
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
