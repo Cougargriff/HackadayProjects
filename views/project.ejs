@@ -25,15 +25,12 @@
   </center>
 
   <div class="recContainer">
-    
+    <% prj.tags.forEach( tag => { %>
+      <h2> <%= `${tags[tag][0].name}` %> </h2>
+      <% console.log(tag) %> 
+    <% }) %>  
   </div>
       
-   
-    
-
-
-    
-    
     <script src="" async defer></script>
   </body>
 </html>

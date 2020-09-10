@@ -49,7 +49,7 @@ app.get("/projects/:id", async (req, res) => {
   const id = req.params.id
   const prj = await getProject(fetch, id)
   const tagMap = {}
-  await Promise.all(prj.tags.foreach( async tag => {
+  await Promise.all(prj.tags.map( async tag => {
     tagMap[tag] = await findTag(fetch, tag)
   }))
 
