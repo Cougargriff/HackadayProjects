@@ -1,10 +1,9 @@
 module.exports = {
-  'Project List Loading Test ' : function(browser) {
+  "Project List Loading Test ": function (browser) {
     browser
-      .url('https://localhost:3000/')
-      .waitForElementVisible('body')
-      .assert.visible('#ListTitle')
-      .assert.containsText('.mainline-results', 'Nightwatch.js')
+      .url("http://localhost:3000/")
+      .waitForElementVisible("body", 30000)
+      .assert.visible("#ListTitle")
       .end();
-  }
+  },
 };
