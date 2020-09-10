@@ -4,7 +4,7 @@
   "description": "hackaday projects display",
   "main": "index.js",
   "scripts": {
-    "test": "npm start & nightwatch --env selenium.firefox",
+    "test": "npm start & nightwatch --env selenium.firefox && killall node",
     "start": "sass --watch ./public/sass/main.sass:./public/css/main.css & node app.js"
   },
   "repository": {
