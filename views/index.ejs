@@ -13,10 +13,14 @@
   <body>
     <div class="ProjectsContainer">
       <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
-      <div class="ProjectContent" style=<%= `background-image: url(${element.image_url})` %> >
-        <img src=<%= `${element.image_url}` %> width="30%" />
-        <%= element.name %> <br/> 
-        <div class="tooltip">
+        <a href=<%=`/${element.id}`%>>
+        <div class="ProjectContent" style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/600x600/${split[1]}`})(element.image_url.split("images/")) %>)" >
+        
+        <div class="projectWords projectTitle">
+          <%= element.name %>
+        </div>
+         <br/> 
+        <div class="tooltip projectWords">
           <%= element.owner.screen_name %>
           <span class="tooltiptext">
             <%= element.owner.username %> <br/>
@@ -26,9 +30,10 @@
             <%= new Date(element.owner.created) %>
           </span>
       </div>
-         <br/> <br/>  <%- element.summary %> <br/> <br/>  
-        <%- element.description %>
+         <br/> <br/> <div class="snippet projectWords"> <%- element.summary %> </div>  <br/> <br/>  
+        
       </div>
+    </a>
       <% }) %>
     </div>
     <div class="PageBar" id="pageBar">
@@ -44,7 +49,7 @@
       })
 
       $('#pageBar').click(() => {
-        alert(`${++i}`)
+
       })
       $('#prevB').click( () => {
        

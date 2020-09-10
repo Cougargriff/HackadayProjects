@@ -6,7 +6,7 @@
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color: #555;
+  background-color: #222222;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -39,19 +39,43 @@
   align-items: center;
   justify-content: space-evenly;
   padding: 20px;
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 100px; }
+
+.projectTitle {
+  font-size: 40px;
+  font-family: "Noto Sans JP", sans-serif; }
+
+.projectWords {
+  background: black;
+  max-width: 90%;
+  opacity: 0.7;
+  color: white;
+  padding: 5px; }
+
+.snippet {
+  bottom: 30px;
+  position: absolute;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 .ProjectContent {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
   font-family: "Roboto", sans-serif;
   width: 600px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 400px;
+  height: 600px;
   border-radius: 20px;
   padding: 30px;
   margin: 30px;
   transition-duration: 0.4s; }
   .ProjectContent:hover {
+    transform: scale(1.1);
     -webkit-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
@@ -102,6 +126,7 @@
     color: black; }
 
 body {
+  width: 100%;
   background: white;
   align-items: center;
   align-content: center; }

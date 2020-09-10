@@ -24,5 +24,16 @@ const getPageGen = () => {
   return getPage
 }
 
+const getProject = async (fetch, id) => {
+  const url_prefix = process.env.API_URL
+  const key = process.env.API_KEY
+  const url = `${url_prefix}projects/${id}?api_key=${key}`
 
-module.exports = { getPageGen }
+  res = await fetch(url).then(res => res.json())
+
+  return res
+}
+
+
+
+module.exports = { getPageGen, getProject }

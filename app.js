@@ -6,6 +6,7 @@ require("dotenv").config();
 
 var Projects = require("./src/Projects.js");
 var Users = require("./src/Users.js");
+var getProject = Projects.getProject;
 var getPage = Projects.getPageGen();
 var getUser = Users.getUserGen();
 
@@ -40,6 +41,15 @@ app.get("/", async (req, res) => {
     currPage: pg
   });
 });
+
+app.get("/:id", async (req, res) => {
+  const id = req.params.id
+  const prj = JSON.stringify(await getProject(fetch, id))
+    
+  res.render("project", {
+    prj: prj
+  });
+})
 
 /* TODO add details page for project */
 
