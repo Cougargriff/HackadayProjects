@@ -9,8 +9,6 @@
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/css/main.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="ejs.min.js"></script>
 </head>
 
 <body>
@@ -74,61 +72,57 @@
       history.pushState({
         page: n
       }, "title", `?page=${n}`)
-      //setButtonListeners()
+
     }
+
+    const requestFromServer = (url, cb) => {
+      var r = new XMLHttpRequest();
+      r.open("GET", url, true);
+      r.onreadystatechange = () => {
+        if(r.readyState != 4 || r.status != 200) { 
+          return
+        } else {
+          /* Success! */
+          cb(r.responseText)
+        }
+
+      }
+      r.send()
+    }
+
     const setButtonListeners = () => {
       document.getElementById("nextB").addEventListener('click', () => {
         if (!pageCache.has(pgNum + 1)) {
-          $.ajax({
-            url: `/projects-api/${pgNum + 1}`,
-            type: 'GET',
-            success: (data) => {
-              pgNum = pgNum + 1
-              formatProjects(data, pgNum)
-              pageCache.set(pgNum, data)
 
-            },
-            error: (req, err) => {
-              alert(`Something went wrong...${err}`)
-            }
+
+          requestFromServer(`/projects-api/${pgNum + 1}`, (data) => {
+            pgNum = pgNum + 1
+            formatProjects(data, pgNum)
+            pageCache.set(pgNum, data)
           })
         } else {
           pgNum = pgNum + 1
           formatProjects(pageCache.get(pgNum), pgNum)
-
         }
       }, true)
 
         document.getElementById("prevB").addEventListener('click', () => {
           if (!pageCache.has(pgNum - 1) && pgNum > 1) {
-            $.ajax({
-              url: `/projects-api/${pgNum - 1}`,
-              type: 'GET',
-              success: (data) => {
-                pgNum = pgNum - 1
+            requestFromServer(`/projects-api/${pgNum - 1}`, (data) => {
+              pgNum = pgNum - 1
                 formatProjects(data, pgNum)
                 pageCache.set(pgNum, data)
-              },
-              error: (req, err) => {
-                alert(`Something went wrong...${err}`)
-              }
             })
           } else {
             pgNum = pgNum > 1 ? pgNum - 1 : 1
             if(pgNum == 1) {
-              $.ajax({
-              url: `/projects-api/${1}`,
-              type: 'GET',
-              success: (data) => {
+              requestFromServer(`/projects-api/${1}`, (data) => {
                 pgNum = 1
                 formatProjects(data, 1)
                 pageCache.set(1, data)
-              },
-              error: (req, err) => {
-                alert(`Something went wrong...${err}`)
-              }
-            })
-            } else {
+              })
+            }
+            else {
               formatProjects(pageCache.get(pgNum), pgNum)
             }
             
