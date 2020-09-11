@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <h1 class="Title"><%= title %></h1>
+    <h1 id="ListTitle" class="Title"><%= title %></h1>
     <h3></h3>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -65,6 +65,14 @@
       var pgNum = <%= currPage %>;
       var pageCache = {}
 
+      const formatProjects = (projects) => {
+        console.log(projects)
+        
+
+
+
+      }
+
       $('#nextB').click( () => {
         if(pageCache[pgNum + 1] == undefined) {
           $.ajax({
@@ -72,8 +80,8 @@
             type: 'GET',
             dataType: 'json',
             success: (data) => {
-              console.log(data)
-              pgNum++
+              formatProjects(data)
+              pgNum = data.currPage
               pageCache[pgNum] = data
             },
             error: (req, err) => {
@@ -95,8 +103,8 @@
             type: 'GET',
             dataType: 'json',
             success: (data) => {
-              console.log(data)
-              pgNum = gotoN
+              formatProjects(data)
+              pgNum = data.currPage
               pageCache[gotoN] = data
             },
             error: (req, err) => {

@@ -4,7 +4,7 @@
   "description": "hackaday projects display",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "nightwatch --env default",
     "start": "sass --watch ./public/sass/main.sass:./public/css/main.css & node app.js"
   },
   "repository": {
@@ -21,7 +21,13 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "nightwatch": "^1.4.1",
     "node-fetch": "^2.6.1",
     "saas": "^1.0.0"
+  },
+  "devDependencies": {
+    "chromedriver": "^85.0.1",
+    "geckodriver": "^1.20.0",
+    "selenium-server": "^3.141.59"
   }
 }
