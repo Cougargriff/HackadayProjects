@@ -60,7 +60,7 @@ app.get("/projects-api/:pg", async (req, res) => {
 
   var page = await getPage(fetch, pg);
 
-  consoleLog("Retrieved projects for client");
+  consoleLog("Retrieved projects for client", page);
   page = await Promise.all(
     page.map(async (prj) => {
       var author = await getUser(fetch, prj.owner_id);

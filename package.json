@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm start & nightwatch --env selenium.firefox && killall node",
-    "start": "sass --watch ./public/sass/main.sass:./public/css/main.css & node app.js"
+    "start": "sass --watch ./public/sass/main.sass:./public/css/main.css & nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "nightwatch": "^1.4.1",
     "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.4",
     "saas": "^1.0.0"
   },
   "devDependencies": {

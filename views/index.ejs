@@ -1,123 +1,144 @@
 <!DOCTYPE html>
 <html class="no-js">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <h1 id="ListTitle" class="Title"><%= title %></h1>
-    <h3></h3>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="ejs.min.js"></script>
-  </head>
-  <body>
-    <div class="ProjectsContainer" id="projectListContainer">
-      <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
-        <a href=<%=`/projects/${element.id}`%>>
-        <div class="ProjectContent" 
-          style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/600x600/${split[1]}`})(element.image_url.split("images/")) %>)">
-        
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <h1 id="ListTitle" class="Title"><%= title %></h1>
+  <h3></h3>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="ejs.min.js"></script>
+</head>
+
+<body>
+  <div class="ProjectsContainer" id="projectListContainer">
+    <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
+    <a href=<%=`/projects/${element.id}`%>>
+      <div class="ProjectContent"
+        style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/600x600/${split[1]}`})(element.image_url.split("images/")) %>)">
+
         <div class="projectWords projectTitle">
           <%= element.name %>
         </div>
-         <br/> 
+        <br />
         <div class="tooltip projectWords">
           <%= element.owner.screen_name %>
           <span class="tooltiptext">
+            <div>
               <div>
-                <div>
-                  <%= element.owner.username %> 
-                </div>
-                <div class="aboutTool">
-                  <%= `${element.owner.about_me}` %>
-                </div>
-                <br/>
-                <div>
-                  <%= `${element.owner.projects} Project${element.owner.projects > 1 ? "s" : ""}` %> 
-                </div>
-                
-                <div class="toolContainer">
-                  <%= element.owner.followers %> Followers  &nbsp;|  &nbsp;
-                  <%= element.owner.following %> Following 
-                </div>
-                <div class="toolContainer">
-                  
-                </div>
+                <%= element.owner.username %>
               </div>
+              <div class="aboutTool">
+                <%= `${element.owner.about_me}` %>
+              </div>
+              <br />
+              <div>
+                <%= `${element.owner.projects} Project${element.owner.projects > 1 ? "s" : ""}` %>
+              </div>
+
+              <div class="toolContainer">
+                <%= element.owner.followers %> Followers &nbsp;| &nbsp;
+                <%= element.owner.following %> Following
+              </div>
+              <div class="toolContainer">
+
+              </div>
+            </div>
           </span>
         </div>
-         <br/> <br/> <div class="snippet projectWords"> <%- element.summary %> </div>  <br/> <br/>  
-        
+        <br /> <br />
+        <div class="snippet projectWords"> <%- element.summary %> </div> <br /> <br />
+
       </div>
     </a>
-      <% }) %>
-      <div class="PageBar" id="pageBar">
-        <% if (currPage > 1) { %>
-          <a class="Button" id="prevB"> Previous Page </a>
-        <% } %> 
-        <a class="Button" id="nextB"> Next Page </a>
-      </div>
-    </div>
+    <% }) %>
     
-    <script>
-      /*
+  </div>
+  <div class="PageBar" id="pageBar">
+    <a class="Button" id="prevB"> Previous Page </a>
+    <a class="Button" id="nextB"> Next Page </a>
+  </div>
+  <script>
+    /*
         href==?page=${currPage - 1}
       */
-      var pgNum = <%= currPage %>;
-      var pageCache = {}
-      const formatProjects = (html, n) => {
-        
-        document.getElementById("projectListContainer").innerHTML = html
-        console.log("Loaded Page " + n)
-        setButtonListeners()
-      }
-      const setButtonListeners = () => {
-        document.getElementById("nextB").addEventListener('click', () => {
-          if(pageCache[pgNum + 1] == undefined) {
-            $.ajax({
-              url: `/projects-api/${pgNum + 1}`,
-              type: 'GET',
-              success: (data) => {
-                pgNum = pgNum + 1
-                pageCache[pgNum] = data
-                formatProjects(data, pgNum)
-              },
-              error: (req, err) => {
-                alert(`Something went wrong...${err}`)
-              }
-            })
-          }
-          else {
-            formatProjects(pageCache[pgNum + 1])
-            pgNum++
-          }
-        }, false)
+    var pgNum = <%= parseInt(currPage) %> || 1;
+    var pageCache = new Map()
+    const formatProjects = (html, n) => {
+
+      document.getElementById("projectListContainer").innerHTML = html
+      console.log("Loaded Page " + n)
+      history.pushState({
+        page: n
+      }, "title", `?page=${n}`)
+      //setButtonListeners()
+    }
+    const setButtonListeners = () => {
+      document.getElementById("nextB").addEventListener('click', () => {
+        if (!pageCache.has(pgNum + 1)) {
+          $.ajax({
+            url: `/projects-api/${pgNum + 1}`,
+            type: 'GET',
+            success: (data) => {
+              pgNum = pgNum + 1
+              formatProjects(data, pgNum)
+              pageCache.set(pgNum, data)
+
+            },
+            error: (req, err) => {
+              alert(`Something went wrong...${err}`)
+            }
+          })
+        } else {
+          pgNum = pgNum + 1
+          formatProjects(pageCache.get(pgNum), pgNum)
+
+        }
+      }, true)
 
         document.getElementById("prevB").addEventListener('click', () => {
-          const gotoN = pgNum > 1 ? pgNum - 1 : 1 
-          if(pageCache[gotoN] == undefined) {
+          if (!pageCache.has(pgNum - 1) && pgNum > 1) {
             $.ajax({
-              url: `/projects-api/${gotoN}`,
+              url: `/projects-api/${pgNum - 1}`,
               type: 'GET',
               success: (data) => {
-                formatProjects(data)
-                pgNum = gotoN
-                pageCache[gotoN] = data
+                pgNum = pgNum - 1
+                formatProjects(data, pgNum)
+                pageCache.set(pgNum, data)
               },
               error: (req, err) => {
                 alert(`Something went wrong...${err}`)
               }
             })
+          } else {
+            pgNum = pgNum > 1 ? pgNum - 1 : 1
+            if(pgNum == 1) {
+              $.ajax({
+              url: `/projects-api/${1}`,
+              type: 'GET',
+              success: (data) => {
+                pgNum = 1
+                formatProjects(data, 1)
+                pageCache.set(1, data)
+              },
+              error: (req, err) => {
+                alert(`Something went wrong...${err}`)
+              }
+            })
+            } else {
+              formatProjects(pageCache.get(pgNum), pgNum)
+            }
+            
           }
-          else {
-            pgNum = gotoN
-            formatProjects(pageCache[gotoN], pgNum)
-          }
-        }, false)
-      } 
+        }, true)
+     
+    }
 
-      setButtonListeners()
-    </script>
-  </body>
+    setButtonListeners()
+  </script>
+</body>
+
 </html>
