@@ -57,3 +57,5 @@ A lot of this project was new to me.
 
 I have never used EJS, SASS or Nightwatch before working on this challenge.
 
+Some of the css was new to me including the tooltip element.
+

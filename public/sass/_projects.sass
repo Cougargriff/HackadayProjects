@@ -1,3 +1,5 @@
+
+
 .ProjectsContainer
   display: flex
   flex-wrap: wrap
@@ -5,11 +7,8 @@
   justify-content: space-evenly
   width: 100%
   margin-bottom: 100px
-
-.projectTitle
-  opacity: 1
-  font-size: 40px
-  font-family: 'Noto Sans JP', sans-serif
+  @media (max-width: 800px )
+    margin-bottom: 200px
 
 .projectTitle
   display: inline-block
@@ -30,6 +29,9 @@
   flex-flow: wrap
   gap: 10px
   align-items: center
+  @media (max-width: 800px )
+    font-size: 10px
+    gap: 3px
 
 .projectWords
   border-radius: 10px
@@ -40,6 +42,8 @@
   color: white
   padding: 10px
   margin-top: 10px
+  @media (max-width: 800px )
+    padding: 5px
 
 .projectWordsSmall
   border-radius: 10px
@@ -59,6 +63,8 @@
   -webkit-box-orient: vertical
   overflow: hidden
   text-overflow: ellipsis
+  @media (max-width: 800px )
+    font-size: 10px
 
 .snippetSmall
   font-size: 10px
@@ -86,6 +92,12 @@ a
   padding: 30px
   margin: 30px
   transition-duration: 0.4s
+  @media (max-width: 800px )
+    padding: 15px
+    margin: 15px
+    width: 250px
+    height: 250px
+
   &:hover
     transform: scale(1.1)
     -webkit-box-shadow: 0px 10px 63px -8px rgba(0,0,0,0.75)
@@ -100,7 +112,8 @@ a
 
 .PageBar
   width: 100%
-  height: 80px
+  padding-top: 10px
+  padding-bottom: 10px
   position: fixed
   background: white
   opacity: 0.9
@@ -111,6 +124,8 @@ a
   align-items: center
   display: flex
   justify-content: space-evenly
+  @media (max-width: 800px )
+    flex-direction: column
 
 .PageNum
   font-size: 20px
@@ -127,6 +142,9 @@ a
   font-size: 90px
   text-align: center
   padding: 25px
+  @media (max-width: 800px )
+    padding: 10px
+    font-size: 50px
 
 .Button
   font-family: 'Roboto', sans-serif
@@ -142,6 +160,8 @@ a
   border: 2px solid white
   text-decoration: none
   transition-duration: 0.6s
+  @media (max-width: 800px )
+    width: 150px
 
   &:hover
     background: transparent
