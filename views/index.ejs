@@ -54,21 +54,60 @@
     </div>
     <div class="PageBar" id="pageBar">
       <% if (currPage > 1) { %>
-        <a class="Button" id="prevB" href=<%=`?page=${currPage - 1}`%>> Previous Page </a>
+        <a class="Button" id="prevB"> Previous Page </a>
       <% } %> 
-      <a class="Button" id="nextB" href=<%=`?page=${currPage + 1}`%>> Next Page </a>
+      <a class="Button" id="nextB"> Next Page </a>
     </div>
     <script>
-      var i = 0
+      /*
+        href==?page=${currPage - 1}
+      */
+      var pgNum = <%= currPage %>;
+      var pageCache = {}
+
       $('#nextB').click( () => {
-    
+        if(pageCache[pgNum + 1] == undefined) {
+          $.ajax({
+            url: `/projects-api/${pgNum + 1}`,
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => {
+              console.log(data)
+              pgNum++
+              pageCache[pgNum] = data
+            },
+            error: (req, err) => {
+              alert(`Something went wrong...${err}`)
+            }
+          })
+        }
+        else {
+          console.log(pageCache[pgNum + 1])
+          pgNum++
+        }
       })
 
-      $('#pageBar').click(() => {
-
-      })
       $('#prevB').click( () => {
-       
+        const gotoN = pgNum > 1 ? pgNum - 1 : 1 
+        if(pageCache[gotoN] == undefined) {
+          $.ajax({
+            url: `/projects-api/${gotoN}`,
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => {
+              console.log(data)
+              pgNum = gotoN
+              pageCache[gotoN] = data
+            },
+            error: (req, err) => {
+              alert(`Something went wrong...${err}`)
+            }
+          })
+        }
+        else {
+          console.log(pageCache[gotoN])
+          pgNum = gotoN
+        }
       })
 
     </script>
