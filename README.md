@@ -17,8 +17,18 @@ Here is a sample file,
   API_URL=https://api.hackaday.io/v1/
 ```
 
-To run the project,
+To run the project in development mode,
+> npm run dev
+
+This starts our node app with nodemon to auto reload when js files are modified. 
+Sass will also watch our .sass styling files for changes to recompile into 
+our main.css file.
+
+To start our app regularly,
 > npm start
+
+This command will compile our sass styling files once, then start our node server.
+
 
 
 ## How to run tests
