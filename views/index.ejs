@@ -53,12 +53,15 @@
       </div>
     </a>
     <% }) %>
-    
-  </div>
-  <div class="PageBar" id="pageBar">
+    <div class="PageBar" id="pageBar">
     <a class="Button" id="prevB"> Previous Page </a>
+    <div class="projectWords paginationNum">
+    <%= `${currPage}` %>
+    </div>
     <a class="Button" id="nextB"> Next Page </a>
   </div>
+  </div>
+  
   <script>
     /*
         href==?page=${currPage - 1}
@@ -72,7 +75,7 @@
       history.pushState({
         page: n
       }, "title", `?page=${n}`)
-
+      setButtonListeners()
     }
 
     const requestFromServer = (url, cb) => {
