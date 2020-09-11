@@ -18,11 +18,10 @@ var findTag = Tags.findTagGen();
 const port = 3000;
 app.use(express.static("public"));
 app.use("/css", express.static(__dirname + "public/css"));
-app.use("/js", express.static(__dirname + "public/js"));
-app.use("/img", express.static(__dirname + "public/img"));
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
+/* Server Logging w/ time */
 const consoleLog = (text) => {
   var date = new Date();
   console.log(
@@ -32,10 +31,8 @@ const consoleLog = (text) => {
 
 app.get("/", async (req, res) => {
   const pg = req.query.page === undefined ? 1 : parseInt(req.query.page);
-
   consoleLog("Serving Projects List");
   var page = await getPage(fetch, pg);
-
   consoleLog("Received List");
   page = await Promise.all(
     page.map(async (prj) => {

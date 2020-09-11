@@ -24,9 +24,7 @@ const getPageGen = () => {
       })
       res = res.projects
     } else {
-      
       var rn = Date.now()
-
       /* Check time to see if we should update our cached page */
       if (res.lastUpdated < (rn - THIRTY_MIN)) { 
         res = (await fetch(url).then(res => res.json()))

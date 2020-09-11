@@ -80,15 +80,12 @@
   </div>
   
   <script>
-    /*
-        href==?page=${currPage - 1}
-      */
     var pgNum = <%= parseInt(currPage) %> || 1;
     var pageCache = new Map()
     const formatProjects = (html, n) => {
 
       document.getElementById("projectListContainer").innerHTML = html
-      console.log("Loaded Page " + n)
+      /* console.log("Loaded Page " + n) */
       history.pushState({
         page: n
       }, "title", `?page=${n}`)
@@ -148,9 +145,7 @@
             
           }
         }, true)
-     
     }
-
     setButtonListeners()
   </script>
 </body>

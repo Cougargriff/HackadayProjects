@@ -1,5 +1,8 @@
 const findTagGen = () => {
   
+  /*
+    Map serves as a 30min cache for lists of projects by tag
+  */
   var seenTags = new Map()
   const THIRTY_MIN = 1800000
 
