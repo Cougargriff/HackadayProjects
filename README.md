@@ -49,7 +49,7 @@ will only remember the cached data for 30 min. If data is older than 30 min, new
 and sent to the client which replaces the old cached data.
 
 I'm using vanilla js on the client to make further pagination requests to the server, however,
-I opted to use the node-fetch module on the server to simplify api requests with the use of promises and async / await logic. 
+I opted to use the node-fetch module on the server to simplify API requests with the use of promises and async / await logic. 
 
 ### Things new to me
 

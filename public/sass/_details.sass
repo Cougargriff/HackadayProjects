@@ -4,10 +4,30 @@ $detailsWidth: 900px
 
 
 .recContainer
+  padding: 10px
+  max-width: 90%
   display: flex
   align-items: center
+  flex-flow: wrap
   justify-content: space-evenly
 
+.RecContent
+  position: relative
+  background-repeat: no-repeat
+  background-size: contain
+  font-family: 'Roboto', sans-serif
+  width: 200px
+  height: 200px
+  border-radius: 20px
+  padding: 10px
+  margin: 30px
+  transition-duration: 0.4s
+  &:hover
+    transform: scale(1.1)
+    -webkit-box-shadow: 0px 10px 63px -8px rgba(0,0,0,0.75)
+    -moz-box-shadow: 0px 10px 63px -8px rgba(0,0,0,0.75)
+    box-shadow: 0px 10px 63px -8px rgba(0,0,0,0.75)
+    cursor: pointer
 
 .detailsContainer
   padding-top: 70px

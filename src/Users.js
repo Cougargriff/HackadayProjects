@@ -22,7 +22,7 @@ const getUserGen = () => {
       const rn = Date.now()
       if (res.lastUpdated < (rn - THIRTY_MIN)) { 
         res = await fetch(url).then(res => res.json())
-        projectMap.set(id, {
+        userList.set(id, {
           user: res,
           lastUpdated: Date.now()
         })

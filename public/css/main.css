@@ -61,6 +61,12 @@
   font-size: 40px;
   font-family: "Noto Sans JP", sans-serif; }
 
+.projectTitle {
+  display: inline-block;
+  opacity: 1;
+  font-size: 30px;
+  font-family: "Noto Sans JP", sans-serif; }
+
 .paginationNum {
   text-align: center;
   font-size: 20px;
@@ -68,16 +74,43 @@
   opacity: 1;
   font-family: "Roboto", sans-serif; }
 
+.moreMeta {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  gap: 10px; }
+
 .projectWords {
+  border-radius: 10px;
+  background: black;
+  max-width: 90%;
+  opacity: 0.85;
+  color: white;
+  padding: 10px;
+  margin-top: 10px; }
+
+.projectWordsSmall {
   border-radius: 10px;
   background: black;
   max-width: 90%;
   opacity: 0.7;
   color: white;
-  padding: 10px; }
+  padding: 3px; }
 
 .snippet {
   bottom: 30px;
+  position: absolute;
+  max-width: 90%;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.snippetSmall {
+  font-size: 10px;
+  bottom: 10px;
   position: absolute;
   max-width: 90%;
   display: block;
@@ -155,9 +188,30 @@
     color: black; }
 
 .recContainer {
+  padding: 10px;
+  max-width: 90%;
   display: flex;
   align-items: center;
+  flex-flow: wrap;
   justify-content: space-evenly; }
+
+.RecContent {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-family: "Roboto", sans-serif;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 30px;
+  transition-duration: 0.4s; }
+  .RecContent:hover {
+    transform: scale(1.1);
+    -webkit-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 10px 63px -8px rgba(0, 0, 0, 0.75);
+    cursor: pointer; }
 
 .detailsContainer {
   padding-top: 70px;

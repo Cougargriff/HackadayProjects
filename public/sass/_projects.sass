@@ -11,6 +11,12 @@
   font-size: 40px
   font-family: 'Noto Sans JP', sans-serif
 
+.projectTitle
+  display: inline-block
+  opacity: 1
+  font-size: 30px
+  font-family: 'Noto Sans JP', sans-serif
+
 .paginationNum
   text-align: center
   font-size: 20px
@@ -18,17 +24,43 @@
   opacity: 1
   font-family: 'Roboto', sans-serif
 
+.moreMeta
+  display: flex
+  flex-direction: row
+  flex-flow: wrap
+  gap: 10px
 
 .projectWords
   border-radius: 10px
   background: black
   max-width: 90%
-  opacity: 0.7
+  opacity: 0.85
   color: white
   padding: 10px
+  margin-top: 10px
+
+.projectWordsSmall
+  border-radius: 10px
+  background: black
+  max-width: 90%
+  opacity: 0.7
+  color: white
+  padding: 3px
 
 .snippet 
   bottom: 30px
+  position: absolute
+  max-width: 90%
+  display: block
+  display: -webkit-box
+  -webkit-line-clamp: 8
+  -webkit-box-orient: vertical
+  overflow: hidden
+  text-overflow: ellipsis
+
+.snippetSmall
+  font-size: 10px
+  bottom: 10px
   position: absolute
   max-width: 90%
   display: block

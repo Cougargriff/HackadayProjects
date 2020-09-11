@@ -83,9 +83,14 @@ app.get("/projects-api/:pg", async (req, res) => {
 app.get("/projects/:id", async (req, res) => {
   const id = req.params.id;
   consoleLog("Serving Project Details");
-  const prj = await getProject(fetch, id);
+  var prj = await getProject(fetch, id);
   const tagMap = {};
 
+  prj = {
+    ...prj,
+    owner: await getUser(fetch, prj.owner_id)
+  }
+  
   consoleLog("Finding recommended projects");
   await Promise.all(
     prj.tags.map(async (tag) => {

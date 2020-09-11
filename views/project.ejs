@@ -16,20 +16,64 @@
   <body>
     
   <center>
-    <div class="CoverPhoto" style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/720x720/${split[1]}`})(prj.image_url.split("images/")) %>)" >
+    <div class="CoverPhoto" style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/720x720/${split[1]}`})(prj.image_url ? prj.image_url.split("images/") : "https://cdn.hackaday.io/images/1085561390426767411.png".split("images/")) %>)" >
       <h1 class="projectWords detailsTitle" > <%- prj.name %>  </h1>
     </div>
+    <div class="tooltip projectWords">
+          <%= prj.owner.screen_name %>
+          <span class="tooltiptext">
+            <div>
+              <div>
+                <%= prj.owner.username %>
+              </div>
+              <div class="aboutTool">
+                <%= `${prj.owner.about_me}` %>
+              </div>
+              <br />
+              <div>
+                <%= `${prj.owner.projects} Project${prj.owner.projects > 1 ? "s" : ""}` %>
+              </div>
+
+              <div class="toolContainer">
+                <%= prj.owner.followers %> Followers &nbsp;| &nbsp;
+                <%= prj.owner.following %> Following
+              </div>
+              <div class="toolContainer">
+
+              </div>
+            </div>
+          </span>
+        </div>
     <div class="detailsContainer textContainer">
       <%- prj.description %> 
     </div>
-  </center>
+    </br> </br>
+    <h2 class="projectWords">
+      Similar Projects
+    </h2>
 
-  <div class="recContainer">
+    <div class="recContainer">
+    <% var seenPrjs = new Map()%>
     <% prj.tags.forEach( tag => { %>
-      <h2> <%= `${tags[tag][0].name}` %> </h2>
+      <% var element = tags[tag][0]%>
+      <% if(element !== undefined && !seenPrjs.has(element.id) && element.id !== prj.id) { %>
+        <% seenPrjs.set(element.id, element) %>
+        <a href=<%=`/projects/${element.id}`%>>
+          <div class="RecContent" style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/200x200/${split[1]}`})(element.image_url ? element.image_url.split("images/") : "https://cdn.hackaday.io/images/1085561390426767411.png".split("images/")) %>)" >
+            <div class="projectWordsSmall projectTitleSmall">
+              <%= element.name %>
+            </div>
+            <br/> <br/> <br/> 
+            <div class="snippetSmall projectWordsSmall"> 
+              <%- element.summary %> 
+            </div>  
+            <br/> <br/>  
+          </div>
+        </a>
+      <% } %>
     <% }) %>  
   </div>
-      
-    <script src="" async defer></script>
+
+  </center>
   </body>
 </html>
