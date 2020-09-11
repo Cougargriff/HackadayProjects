@@ -34,7 +34,7 @@ This command will compile our sass styling files once, then start our node serve
 
 This project is configured to use Nightwatch as a testing framework. Testing works best
 on a linux / macOS machine. I have had troubles getting webdrivers to work on Windows's
-WSL. With that said, I am using the selenium-server to drive a firefox instance for testing.
+WSL. With that said, I am using the selenium-server to drive a firefox instance for testing. Running on Arch Linux.
 
 The tests are stored in ./tests.
 
