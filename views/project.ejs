@@ -19,7 +19,8 @@
     <div class="CoverPhoto" style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/720x720/${split[1]}`})(prj.image_url ? prj.image_url.split("images/") : "https://cdn.hackaday.io/images/1085561390426767411.png".split("images/")) %>)" >
       <h1 class="projectWords detailsTitle" > <%- prj.name %>  </h1>
     </div>
-    <div class="tooltip projectWords">
+    <div class="detailsMeta">
+      <div class="tooltip projectWords">
           <%= prj.owner.screen_name %>
           <span class="tooltiptext">
             <div>
@@ -44,6 +45,23 @@
             </div>
           </span>
         </div>
+
+      <div class="projectWords tooltip">
+        <%= `${prj.followers} Followers` %>
+      </div>
+      <div class="projectWords tooltip">
+        <%= `${prj.views} Views` %>
+      </div>
+      <div class="projectWords tooltip">
+        <%= `${prj.skulls} Skulls` %>
+      </div>
+      <div class="projectWords tooltip">
+            <%= `${prj.comments} Comments` %>
+      </div>
+    </div>
+
+    <div class="detailsContainer textContainer" style="text-align: center;"> <%- prj.summary %> </div>
+    
     <div class="detailsContainer textContainer">
       <%- prj.description %> 
     </div>
