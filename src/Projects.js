@@ -11,7 +11,7 @@ const getPageGen = () => {
   var projectList = new Map()
   const THIRTY_MIN = 1800000
 
-  const getPage = async (fetch, n) => {
+  return async (fetch, n) => {
     const url_prefix = process.env.API_URL
     const key = process.env.API_KEY
     const url = `${url_prefix}projects?page=${n}&per_page=12&api_key=${key}`
@@ -41,17 +41,40 @@ const getPageGen = () => {
     }
     return res
   }
-  return getPage
 }
 
-const getProject = async (fetch, id) => {
-  const url_prefix = process.env.API_URL
-  const key = process.env.API_KEY
-  const url = `${url_prefix}projects/${id}?api_key=${key}`
+const getProjectGen = () => {
 
-  res = await fetch(url).then(res => res.json())
+  var projectMap = new Map()
+  const THIRTY_MIN = 1800000
 
-  return res
+  return async (fetch, id) => {
+    const url_prefix = process.env.API_URL
+    const key = process.env.API_KEY
+    const url = `${url_prefix}projects/${id}?api_key=${key}`
+
+    var res = {}
+    if(projectMap.has(id)) {
+      res = projectMap.get(id)
+      const rn = Date.now()
+      if (res.lastUpdated < (rn - THIRTY_MIN)) { 
+        res = await fetch(url).then(res => res.json())
+        projectMap.set(id, {
+          prj: res,
+          lastUpdated: Date.now()
+        })
+      } else {
+        res = res.prj
+      }
+    } else {
+      res = await fetch(url).then(res => res.json())
+      projectMap.set(id, {
+        prj: res,
+        lastUpdated: Date.now()
+      })
+    }
+    return res
+  }
 }
 
-module.exports = { getPageGen, getProject }
+module.exports = { getPageGen, getProjectGen }

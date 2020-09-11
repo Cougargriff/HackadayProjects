@@ -3,23 +3,35 @@ const getUserGen = () => {
     Closure over this map serves as a cache to remember
     which users we have seen.
   */
-  userList = {};
+  var userList = new Map();
+  const THIRTY_MIN = 1800000
 
-  const getUser = async (fetch, id) => {
+  return async (fetch, id) => {
     const url_prefix = process.env.API_URL;
     const key = process.env.API_KEY;
     const url = `${url_prefix}users/${id}?api_key=${key}`;
     var res = {};
-    if (userList[id] == undefined) {
+    if (!userList.has(id)) {
       res = await fetch(url).then((res) => res.json());
-      userList[res.id] = res;
-      res = res;
+      userList.set(id, {
+        user: res,
+        lastUpdated: Date.now()
+        })
     } else {
-      res = userList[id];
+      res = userList.get(id);
+      const rn = Date.now()
+      if (res.lastUpdated < (rn - THIRTY_MIN)) { 
+        res = await fetch(url).then(res => res.json())
+        projectMap.set(id, {
+          user: res,
+          lastUpdated: Date.now()
+        })
+      } else {
+        res = res.user
+      }
     }
     return res;
   };
-  return getUser;
 };
 
 module.exports = { getUserGen };

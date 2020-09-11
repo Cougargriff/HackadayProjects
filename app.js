@@ -8,7 +8,9 @@ var Projects = require("./src/Projects.js");
 var Users = require("./src/Users.js");
 var Tags = require("./src/Tags.js");
 const { json } = require("express");
-var getProject = Projects.getProject;
+
+/* Memory Cached API Getters */
+var getProject = Projects.getProjectGen();
 var getPage = Projects.getPageGen();
 var getUser = Users.getUserGen();
 var findTag = Tags.findTagGen();
