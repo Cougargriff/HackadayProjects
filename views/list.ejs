@@ -1,0 +1,45 @@
+<% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
+  <a href=<%=`/projects/${element.id}`%>>
+  <div class="ProjectContent" 
+    style="background-image: url(<%= ((split) => {return `${split[0]}images/resize/600x600/${split[1]}`})(element.image_url.split("images/")) %>)">
+  
+  <div class="projectWords projectTitle">
+    <%= element.name %>
+  </div>
+   <br/> 
+  <div class="tooltip projectWords">
+    <%= element.owner.screen_name %>
+    <span class="tooltiptext">
+        <div>
+          <div>
+            <%= element.owner.username %> 
+          </div>
+          <div class="aboutTool">
+            <%= `${element.owner.about_me}` %>
+          </div>
+          <br/>
+          <div>
+            <%= `${element.owner.projects} Project${element.owner.projects > 1 ? "s" : ""}` %> 
+          </div>
+          
+          <div class="toolContainer">
+            <%= element.owner.followers %> Followers  &nbsp;|  &nbsp;
+            <%= element.owner.following %> Following 
+          </div>
+          <div class="toolContainer">
+            
+          </div>
+        </div>
+    </span>
+  </div>
+   <br/> <br/> <div class="snippet projectWords"> <%- element.summary %> </div>  <br/> <br/>  
+  
+</div>
+</a>
+<% }) %>
+<div class="PageBar" id="pageBar">
+  <% if (currPage > 1) { %>
+    <a class="Button" id="prevB"> Previous Page </a>
+  <% } %> 
+  <a class="Button" id="nextB"> Next Page </a>
+</div>

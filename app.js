@@ -72,12 +72,10 @@ app.get("/projects-api/:pg", async (req, res) => {
   );
   consoleLog("Sending projects to client");
 
-  res.send(
-    JSON.stringify({
-      prjs: page,
-      currPage: pg,
-    })
-  );
+  res.render("list", {
+    prjs: JSON.stringify(page),
+    currPage: pg,
+  });
 });
 
 app.get("/projects/:id", async (req, res) => {

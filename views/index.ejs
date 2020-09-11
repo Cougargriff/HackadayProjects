@@ -9,9 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="ejs.min.js"></script>
   </head>
   <body>
-    <div class="ProjectsContainer">
+    <div class="ProjectsContainer" id="projectListContainer">
       <% prjs = JSON.parse(prjs) %> <% prjs.forEach(element => { %>
         <a href=<%=`/projects/${element.id}`%>>
         <div class="ProjectContent" 
@@ -45,79 +46,78 @@
                 </div>
               </div>
           </span>
-      </div>
+        </div>
          <br/> <br/> <div class="snippet projectWords"> <%- element.summary %> </div>  <br/> <br/>  
         
       </div>
     </a>
       <% }) %>
+      <div class="PageBar" id="pageBar">
+        <% if (currPage > 1) { %>
+          <a class="Button" id="prevB"> Previous Page </a>
+        <% } %> 
+        <a class="Button" id="nextB"> Next Page </a>
+      </div>
     </div>
-    <div class="PageBar" id="pageBar">
-      <% if (currPage > 1) { %>
-        <a class="Button" id="prevB"> Previous Page </a>
-      <% } %> 
-      <a class="Button" id="nextB"> Next Page </a>
-    </div>
+    
     <script>
       /*
         href==?page=${currPage - 1}
       */
       var pgNum = <%= currPage %>;
       var pageCache = {}
-
-      const formatProjects = (projects) => {
-        console.log(projects)
+      const formatProjects = (html, n) => {
         
-
-
-
+        document.getElementById("projectListContainer").innerHTML = html
+        console.log("Loaded Page " + n)
+        setButtonListeners()
       }
+      const setButtonListeners = () => {
+        document.getElementById("nextB").addEventListener('click', () => {
+          if(pageCache[pgNum + 1] == undefined) {
+            $.ajax({
+              url: `/projects-api/${pgNum + 1}`,
+              type: 'GET',
+              success: (data) => {
+                pgNum = pgNum + 1
+                pageCache[pgNum] = data
+                formatProjects(data, pgNum)
+              },
+              error: (req, err) => {
+                alert(`Something went wrong...${err}`)
+              }
+            })
+          }
+          else {
+            formatProjects(pageCache[pgNum + 1])
+            pgNum++
+          }
+        }, false)
 
-      $('#nextB').click( () => {
-        if(pageCache[pgNum + 1] == undefined) {
-          $.ajax({
-            url: `/projects-api/${pgNum + 1}`,
-            type: 'GET',
-            dataType: 'json',
-            success: (data) => {
-              formatProjects(data)
-              pgNum = data.currPage
-              pageCache[pgNum] = data
-            },
-            error: (req, err) => {
-              alert(`Something went wrong...${err}`)
-            }
-          })
-        }
-        else {
-          console.log(pageCache[pgNum + 1])
-          pgNum++
-        }
-      })
+        document.getElementById("prevB").addEventListener('click', () => {
+          const gotoN = pgNum > 1 ? pgNum - 1 : 1 
+          if(pageCache[gotoN] == undefined) {
+            $.ajax({
+              url: `/projects-api/${gotoN}`,
+              type: 'GET',
+              success: (data) => {
+                formatProjects(data)
+                pgNum = gotoN
+                pageCache[gotoN] = data
+              },
+              error: (req, err) => {
+                alert(`Something went wrong...${err}`)
+              }
+            })
+          }
+          else {
+            pgNum = gotoN
+            formatProjects(pageCache[gotoN], pgNum)
+          }
+        }, false)
+      } 
 
-      $('#prevB').click( () => {
-        const gotoN = pgNum > 1 ? pgNum - 1 : 1 
-        if(pageCache[gotoN] == undefined) {
-          $.ajax({
-            url: `/projects-api/${gotoN}`,
-            type: 'GET',
-            dataType: 'json',
-            success: (data) => {
-              formatProjects(data)
-              pgNum = data.currPage
-              pageCache[gotoN] = data
-            },
-            error: (req, err) => {
-              alert(`Something went wrong...${err}`)
-            }
-          })
-        }
-        else {
-          console.log(pageCache[gotoN])
-          pgNum = gotoN
-        }
-      })
-
+      setButtonListeners()
     </script>
   </body>
 </html>
