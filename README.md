@@ -41,7 +41,7 @@ The tests are stored in ./tests.
 You can run the tests with,
 > npm test
 
-## Thinks to Note
+## Things to Note
 
 The API seemed to be a bit slow so I attempted some minor optimizations.
 In the server, there are in memory caches for project pages, users, taggedProjects, and individual projects. To avoid the problem of these caches becoming out of date, the server 
